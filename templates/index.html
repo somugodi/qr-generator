@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}
+QR Generator Pro
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="glass text-center">
+
+            <h1 class="glow mb-3">
+                QR Generator Pro
+            </h1>
+
+            <h5 class="mb-4">
+                Welcome {{ username }}
+            </h5>
+
+            <p class="lead">
+                Generate Premium QR Codes with Colors, Logos & Templates
+            </p>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                <!-- QR Type -->
+
+                <div class="mb-3 text-start">
+
+                    <label class="form-label">
+                        QR Type
+                    </label>
+
+                    <select
+                        name="qr_type"
+                        class="form-control">
+
+                        <option value="text">
+                            Text
+                        </option>
+
+                        <option value="website">
+                            Website
+                        </option>
+
+                        <option value="whatsapp">
+                            WhatsApp
+                        </option>
+
+                        <option value="wifi">
+                            WiFi
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Data Input -->
+
+                <div class="mb-3 text-start">
+
+                    <label class="form-label">
+                        Enter Text / URL / Number
+                    </label>
+
+                    <input
+                        type="text"
+                        name="data"
+                        class="form-control form-control-lg"
+                        placeholder="Enter your data here"
+                        required>
+
+                </div>
+
+                <!-- Color Picker -->
+
+                <div class="mb-3 text-start">
+
+                    <label class="form-label">
+                        QR Color
+                    </label>
+
+                    <input
+                        type="color"
+                        name="qr_color"
+                        class="form-control form-control-color"
+                        value="#000000">
+
+                </div>
+
+                <!-- Logo Upload -->
+
+                <div class="mb-4 text-start">
+
+                    <label class="form-label">
+                        Upload Logo (Optional)
+                    </label>
+
+                    <input
+                        type="file"
+                        name="logo"
+                        class="form-control"
+                        accept=".png,.jpg,.jpeg">
+
+                </div>
+
+                <!-- Generate Button -->
+
+                <button
+                    type="submit"
+                    class="btn btn-success btn-lg px-5">
+
+                    🚀 Generate Premium QR
+
+                </button>
+
+            </form>
+
+            {% if qr_image %}
+
+            <hr class="my-4">
+
+            <h3>
+                Your Generated QR Code
+            </h3>
+
+            <br>
+
+            <img
+                src="{{ qr_image }}"
+                class="qr-img img-fluid"
+                width="300">
+
+            <br><br>
+
+            <a
+                href="{{ qr_image }}"
+                download
+                class="btn btn-warning btn-lg">
+
+                📥 Download QR
+
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="row text-center">
+
+    <div class="col-md-4 mb-3">
+
+        <div class="glass">
+
+            <h3>
+                ⚡ Fast
+            </h3>
+
+            <p>
+                Generate QR codes instantly.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="glass">
+
+            <h3>
+                🎨 Custom
+            </h3>
+
+            <p>
+                Upload logos and choose custom colors.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 mb-3">
+
+        <div class="glass">
+
+            <h3>
+                📊 Dashboard
+            </h3>
+
+            <p>
+                Track your QR code history and statistics.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="glass text-center">
+
+    <h2>
+        Premium Features
+    </h2>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <h5>🌐 Website QR</h5>
+        </div>
+
+        <div class="col-md-3">
+            <h5>💬 WhatsApp QR</h5>
+        </div>
+
+        <div class="col-md-3">
+            <h5>📶 WiFi QR</h5>
+        </div>
+
+        <div class="col-md-3">
+            <h5>🏷️ Logo QR</h5>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

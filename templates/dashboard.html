@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<a href="/export_pdf"
+   class="btn btn-danger mb-3">
+   Download PDF Report
+</a>
+
+<div class="container mt-5">
+
+    <!-- Welcome -->
+
+    <div class="glass text-center p-4 mb-4">
+
+        <h1 class="display-5">
+            Welcome, {{ username }}
+        </h1>
+
+        <p class="lead">
+            QR Generator Dashboard
+        </p>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+            <div class="glass p-4 text-center">
+
+                <h1>{{ total_qr }}</h1>
+
+                <h4>Total QR Codes</h4>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <div class="glass p-4 text-center">
+
+                <h1>{{ recent_count }}</h1>
+
+                <h4>Recent QR Codes</h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Analytics Chart -->
+
+    <div class="glass p-4 mt-4">
+
+        <h3 class="text-center mb-4">
+            📊 QR Analytics
+        </h3>
+
+        <canvas id="qrChart"></canvas>
+
+    </div>
+
+    <!-- Latest QR Table -->
+
+    <div class="glass p-4 mt-4">
+
+        <h3 class="mb-4">
+            Latest 5 QR Codes
+        </h3>
+
+        <table class="table table-dark table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Text</th>
+                    <th>Image</th>
+                    <th>Date</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for qr in recent_qr %}
+
+                <tr>
+
+                    <td>{{ qr[0] }}</td>
+
+                    <td>{{ qr[1] }}</td>
+
+                    <td>
+
+                        <img
+                            src="/static/qr_codes/{{ qr[2] }}"
+                            width="80"
+                            class="img-thumbnail"
+                        >
+
+                    </td>
+
+                    <td>{{ qr[4] }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- Chart.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const labels = JSON.parse('{{ labels|tojson }}');
+const values = JSON.parse('{{ values|tojson }}');
+
+const ctx = document.getElementById('qrChart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'QR Generated',
+            data: values
+        }]
+    }
+});
+</script>
+
+{% endblock %}

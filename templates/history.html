@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+History
+{% endblock %}
+
+{% block content %}
+
+<div class="glass">
+
+<h2 class="text-center mb-4">
+QR History
+</h2>
+
+<table class="table table-dark table-hover">
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Text</th>
+<th>QR</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for row in records %}
+
+<tr>
+
+<td>{{ row[0] }}</td>
+
+<td>{{ row[1] }}</td>
+
+<td>
+<img
+src="/static/qr_codes/{{ row[2] }}"
+width="100"
+class="rounded">
+</td>
+
+<td>
+
+<a
+href="/delete/{{ row[0] }}"
+class="btn btn-danger btn-sm">
+Delete
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}
